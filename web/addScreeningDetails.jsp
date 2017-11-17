@@ -69,7 +69,14 @@
                                         displayBuf.append("<option value='" + screenID + "'>" + screenName + "</option>");
                                     }
                                     displayBuf.append("</select>");
-                                    displayBuf.append("<input type='datetime-local' name='screentime' id='screentime'>");
+                                    displayBuf.append("<input type='date' name='screendate' id='screendate'>");
+                                    displayBuf.append("<select name='time' id='time'>");
+                                    displayBuf.append("<option value='10:00 AM'>10:00 AM</option>");
+                                    displayBuf.append("<option value='1:00 PM'>1:00 PM</option>");
+                                    displayBuf.append("<option value='4:00 PM'>4:00 PM</option>");
+                                    displayBuf.append("<option value='6:00 PM'>6:00 PM</option>");
+                                    displayBuf.append("<option value='10:00 PM'>10:00 PM</option>");
+                                    displayBuf.append("<select/>");
                                     displayBuf.append("<input type='hidden'  name='hidoperation' id='hidoperation' value='login'/>");
                                     displayBuf.append("<button>Submit</button>");
                                     //displayBuf2.append("<p class=/"message/">Not registered? <a href=/"#/">Create an account</a></p>");

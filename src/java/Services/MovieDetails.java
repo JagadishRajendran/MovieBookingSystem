@@ -7,6 +7,7 @@ package Services;
 
 import Bean.MovieInfo;
 import DAO.Dao;
+import java.sql.ResultSet;
 
 /**
  *
@@ -21,5 +22,22 @@ public class MovieDetails {
     	Dao dao = new Dao();
     	mi.setAllScreenNames(dao.fetchScreenInfo());
     }
+    public ResultSet getMovieInfo(int movieID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getMovieInfoDao(movieID);
+        return rs;
+    }
+
+    public ResultSet getMovieScreeningInfo(int movieID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getMovieScreeningInfoDao(movieID);
+        return rs;
+    }
+
+   /* public ResultSet getBlockedSeats(int screeningID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.GetBlockedSeatsDao(screeningID);
+        return rs;
+    }*/
 
 }

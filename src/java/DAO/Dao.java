@@ -95,26 +95,27 @@ public class Dao {
         
         try {
             myStmt = myConn.createStatement();String mysql_QueryA;
-            java.util.Date screeningDate = new java.util.Date();
+            /*java.util.Date screeningDate = new java.util.Date();
             SimpleDateFormat simpDate2=new SimpleDateFormat("dd-MM-yyyy HH:mm");
             String screenDate=simpDate2.format(movieInfo.getScreeningTime());
             
             
-            String startDate="01-02-2013";
             SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
             java.util.Date date = sdf1.parse(screenDate);
              
-            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());*/
             
             
-            
+            java.sql.Date sqlpub_date= new java.sql.Date(movieInfo.getScreeningDate().getTime());
+            System.out.println("getScreeningDate--->"+sqlpub_date);
             
             //Insert query to insert values into
-            mysql_QueryA = "INSERT INTO screening(time,movie_id,screen_id) VALUES (?,?,?)";
+            mysql_QueryA = "INSERT INTO screening(screening_date,screening_time ,movie_id,screen_id) VALUES (?,?,?,?)";
             PreparedStatement statement = myConn.prepareStatement(mysql_QueryA);
-            statement.setTimestamp(1, sqlDate);
-            statement.setString(2,movieInfo.getMovieId());
-            statement.setString(3,movieInfo.getScreenId());
+            statement.setDate(1, sqlpub_date);
+            statement.setString(2,  movieInfo.getScreeningTime());
+            statement.setString(3,movieInfo.getMovieId());
+            statement.setString(4,movieInfo.getScreenId());
             int rows_inserted = statement.executeUpdate();
             if (rows_inserted>0)
             {
@@ -129,9 +130,6 @@ public class Dao {
         catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }catch (ParseException ex) {
-                Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
         }
         
         
@@ -142,6 +140,7 @@ public class Dao {
         getConnection();
         
         try {
+            
             myStmt = myConn.createStatement();String mysql_QueryA;
             // Insert query to insert values into Instructor
             mysql_QueryA = "INSERT INTO movie(name,director,cast,description,duration,icon) VALUES (?,?,?,?,?,?)";
@@ -170,16 +169,22 @@ public class Dao {
         
         
     }
+    
+    
+    
     public Boolean updateMovie(MovieInfo movieInfo){
         
         getConnection();
         
-        /*try {
+        try {
             myStmt = myConn.createStatement();String mysql_QueryA;
             // Update query to update values into .
-            mysql_QueryA = "UPDATE movie SET name='"+coursestr+"', book_title_1='"+titlestr+
-            "', book_title_2='"+titlestr_2+"', book_publisher_1='"+publisherstr+"', book_publisher_2='"+publisherstr_2+"', book_edition_1="+edition+
-            ", book_edition_2="+edition_2+", date_1="+pub_date+", date_2="+pub_date_2+" where Course_Name='"+hidcoursestr+"'";
+            mysql_QueryA = "update movie set name='"+movieInfo.getMovie_name()+"', director='"+movieInfo.getDirector()+
+            "', cast='"+movieInfo.getCast()+"', description='"+movieInfo.getDescription()+"', duration='"+movieInfo.getDuration()+"'";
+            if(movieInfo.getMovie_icon()!=null && movieInfo.getMovie_icon()!=""){
+                mysql_QueryA=mysql_QueryA+ ", icon='"+movieInfo.getMovie_icon()+"'";
+            }
+            mysql_QueryA=mysql_QueryA+ " where id='"+movieInfo.getMovieId()+"'";
             // To execute the query.
             PreparedStatement statement = myConn.prepareStatement(mysql_QueryA);
             
@@ -200,9 +205,89 @@ public class Dao {
         catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }*/
-        return false;
+        }
         
+        
+    }
+    
+    public Boolean deleteMovie(MovieInfo movieInfo){
+        
+        getConnection();
+        int rows_insertedB=0;
+        try {
+            myConn.setAutoCommit(false);
+            myStmt = myConn.createStatement();
+            String mysql_QueryA,mysql_QueryB;
+            // Update query to update values into .
+            mysql_QueryA = "delete from movie where id="+movieInfo.getMovieId();
+            if(movieInfo.getScreeningId()!=null && movieInfo.getScreeningId().equals("")){
+                mysql_QueryB = "delete from screening where id="+movieInfo.getScreeningId();
+                PreparedStatement statementB = myConn.prepareStatement(mysql_QueryB);
+                rows_insertedB = statementB.executeUpdate();
+            }    
+            // To execute the query.
+            PreparedStatement statementA = myConn.prepareStatement(mysql_QueryA);
+            
+            
+            int rows_insertedA = statementA.executeUpdate();
+            
+            myConn.commit();
+            System.out.println("rows--->"+rows_insertedA+"B-->"+rows_insertedB);
+            if (rows_insertedA>0 && rows_insertedB>0)
+            {
+                System.out.println("inserted number of rows: "+rows_insertedA+"B-->"+rows_insertedB);
+                return true;
+            }
+            else{
+                myConn.rollback();
+                return false;
+            }
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        
+    }
+    
+    public ResultSet getMovieScreeningInfoDao(int movieID) {
+
+        getConnection();
+
+        try {
+            myStmt = myConn.createStatement();
+            String mysql_movieScrQuery;
+            mysql_movieScrQuery = "select m.name movieName, s.name screenName, sg.screen_id screenID, sg.screening_date screeningDate, sg.screening_time screeningTime, sg.id screeningID "
+                    + "from movie m, screening sg, screen s "
+                    + "where sg.screen_id = s.id and "
+                    + "sg.movie_id = m.id and "
+                    + "sg.movie_id = " + movieID;
+            myRs = myStmt.executeQuery(mysql_movieScrQuery);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return myRs;
+    }
+    
+    
+    
+    public ResultSet getMovieInfoDao(int movieID) {
+
+        getConnection();
+
+        try {
+            myStmt = myConn.createStatement();
+            String mysql_movieDetQuery;
+            mysql_movieDetQuery = "select name,director,cast,description,duration,icon from movie where id = " + movieID;
+            myRs = myStmt.executeQuery(mysql_movieDetQuery);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return myRs;
     }
     
     
@@ -224,6 +309,34 @@ public class Dao {
     	try {
             myStmt = myConn.createStatement();
             myRs = myStmt.executeQuery("select * from screen");
+            return myRs;
+    	} catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+    	}
+            
+    }
+    
+    public ResultSet fetchMovieScreeingDtls() {
+    	getConnection();
+    	try {
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("SELECT movie.name movie_name,director,screening_view.name screen_name,no_of_seats,screening_date,screening_time,movie_id,screening_view.screening_id,screen_id\n" +
+                "FROM movie\n" +
+                "LEFT JOIN (select name,no_of_seats,screening_date,screening_time,movie_id,screen_id,screening.id screening_id from screen,screening where screen.id = screen_id) as screening_view ON movie.id = movie_id");
+            return myRs;
+    	} catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+    	}
+            
+    }
+    
+    public ResultSet fetchMovieByMovieId(MovieInfo movieInfo) {
+    	getConnection();
+    	try {
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("SELECT * from movie where id="+movieInfo.getMovieId());
             return myRs;
     	} catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);

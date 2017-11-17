@@ -35,7 +35,7 @@
                                 <input type='textarea' placeholder='Description' name='description' id='description'/>
                                 <input type='text' placeholder='Duration' name='duration' id='duration'/>
                                 <input type="file" name="file">
-                                <input type='hidden'  name='hidoperation' id='hidoperation' value='login'/>
+                                <input type='hidden'  name='hidoperation' id='hidoperation' value='insert'/>
                                 <input  type="submit" value="Submit" name="newmovie" />
                                 
                                 <%
@@ -48,7 +48,7 @@
                                     
                                     out.println(displayBuf2);*/
                                 %>
-                                <p class="message">Not registered? <a href="#">Create an account</a></p>
+                                
                             </form>
                             
                         </div>

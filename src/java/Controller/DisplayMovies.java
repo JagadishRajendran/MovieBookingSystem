@@ -6,28 +6,23 @@
 package Controller;
 
 import Bean.MovieInfo;
-import java.io.File;
+import Services.MovieDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
-
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author JAGADISH
+ * @author nithi
  */
-@WebServlet(name = "UploadMovieIcon", urlPatterns = {"/UploadMovieIcon"})
-public class UploadMovieIcon extends HttpServlet {
+@WebServlet(name = "DisplayMovies", urlPatterns = {"/DisplayMovies"})
+public class DisplayMovies extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,12 +35,10 @@ public class UploadMovieIcon extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-    }       
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -71,7 +64,11 @@ public class UploadMovieIcon extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("inside--->" + request.getParameter("hidmovieid"));
+        int movieID = Integer.parseInt(request.getParameter("hidmovieid"));
+        HttpSession session = request.getSession();
+        session.setAttribute("movieID", movieID);
+        response.sendRedirect("DisplayMovieInfo.jsp");
     }
 
     /**

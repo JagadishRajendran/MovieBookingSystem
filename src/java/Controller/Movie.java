@@ -49,11 +49,14 @@ public class Movie extends HttpServlet {
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
         System.out.println("fileName--->"+fileName+"---->"+request.getParameter("file"));
-        String savePath = "C:\\Users\\JAGADISH\\Documents\\NetBeansProjects\\MovieBookingSystem\\web\\images" + File.separator + fileName;
-        System.out.println("savePath--->"+savePath+"--->"+part+"*********");
-        File fileSaveDir = new File(savePath);
-        part.write(savePath + File.separator);
         
+        if(fileName!=null && !fileName.equals("")){
+            String savePath = "C:\\Users\\JAGADISH\\Documents\\NetBeansProjects\\MovieBookingSystem\\web\\images" + File.separator + fileName;
+            System.out.println("savePath--->"+savePath+"--->"+part+"*********");
+            File fileSaveDir = new File(savePath);
+            part.write(savePath + File.separator);
+            movieInfo.setMovie_icon(fileName);
+        }
         
         
         
@@ -62,15 +65,27 @@ public class Movie extends HttpServlet {
         movieInfo.setCast(request.getParameter("cast"));
         movieInfo.setDescription(request.getParameter("description"));
         movieInfo.setDuration(Integer.parseInt(request.getParameter("duration")));
-        movieInfo.setMovie_icon(fileName);
         
-        Boolean insert=uploadMovieDetails.insertMovie(movieInfo);
-        if(insert){
-           response.sendRedirect("addMovieDetails.jsp");
+        if(request.getParameter("hidoperation").equals("insert")){
+            Boolean insert=uploadMovieDetails.insertMovie(movieInfo);
+            if(insert){
+               response.sendRedirect("addMovieDetails.jsp");
 
+            }
+            else{
+               response.sendRedirect("addMovieDetails.jsp");
+            }
         }
-        else{
-           response.sendRedirect("addMovieDetails.jsp");
+        else {
+            movieInfo.setMovieId(request.getParameter("hidmovieid"));
+            Boolean insert=uploadMovieDetails.updateMovie(movieInfo);
+            if(insert){
+               response.sendRedirect("displayMovieScreening.jsp");
+
+            }
+            else{
+               response.sendRedirect("UpdateMovie.jsp");
+            }
         }
     }
     

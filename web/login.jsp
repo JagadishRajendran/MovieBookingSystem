@@ -42,23 +42,7 @@
                                 %>
                                 <p class="message">Not registered? <a href="#">Create an account</a></p>
                             </form>
-                            <form class="register-form" action="Login" method="get">
-                                <%
-                                    StringBuffer displayBuf1= new StringBuffer();
-                                    
-                                    displayBuf1.append("<input type='text' placeholder='First Name' id='firstname' name='firstname'/>");
-                                    displayBuf1.append("<input type='text' placeholder='Last Name' id='lastname' name='lastname'/>");
-                                    displayBuf1.append("<input type='text' placeholder='Email id' id='loginid'  name='loginid'/>");
-                                    displayBuf1.append("<input type='hidden'  name='hidoperation' id='hidoperation' value='register'/>");
-                                    displayBuf1.append("<input type='password' placeholder='password' name='password' id='password'/>");
-                                    //displayBuf1.append("<input type='text' placeholder='email address' id='emailid'/>");
-                                    //
-                                    displayBuf1.append("<p class='message'>Already registered? <a href='#'>Sign In</a></p>");
-                                    displayBuf1.append("<button>sign up</button>");
-                                    out.println(displayBuf1);
-                                %>
-                                
-                            </form>
+                            
                         </div>
                     </div>
             </div>

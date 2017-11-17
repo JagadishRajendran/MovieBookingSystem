@@ -21,11 +21,40 @@ public class MovieInfo {
     private int duration;
     private ResultSet allMovieNamesIcon;
     private ResultSet allScreenNames;
-    private Date screeningTime;
+    private Date screeningDate;
+    private String screeningTime;
     private String screenName;
     private String screenId;
+    private String screeningId;
     private String movieId;
 
+    public String getScreeningId() {
+        return screeningId;
+    }
+
+    public void setScreeningId(String screeningId) {
+        this.screeningId = screeningId;
+    }
+
+    
+    
+    public Date getScreeningDate() {
+        return screeningDate;
+    }
+
+    public void setScreeningDate(Date screeningDate) {
+        this.screeningDate = screeningDate;
+    }
+
+    public String getScreeningTime() {
+        return screeningTime;
+    }
+
+    public void setScreeningTime(String screeningTime) {
+        this.screeningTime = screeningTime;
+    }
+
+    
     public String getScreenName() {
         return screenName;
     }
@@ -50,13 +79,6 @@ public class MovieInfo {
         this.movieId = movieId;
     }
     
-    public Date getScreeningTime() {
-        return screeningTime;
-    }
-
-    public void setScreeningTime(Date screeningTime) {
-        this.screeningTime = screeningTime;
-    }
     
     public ResultSet getAllScreenNames() {
         return allScreenNames;

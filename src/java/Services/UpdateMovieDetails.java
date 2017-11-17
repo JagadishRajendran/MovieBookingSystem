@@ -19,7 +19,19 @@ public class UpdateMovieDetails {
         Dao dao=new Dao();
         Boolean insertStatus=dao.InsertMovie(movieInfo);
         return insertStatus;
-    }    
+    }
+
+    public Boolean updateMovie(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean insertStatus=dao.updateMovie(movieInfo);
+        return insertStatus;
+    } 
+
+    public Boolean deleteMovie(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean deleteStatus=dao.deleteMovie(movieInfo);
+        return deleteStatus;
+    }     
     
     
 }

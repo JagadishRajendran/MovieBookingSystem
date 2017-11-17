@@ -6,14 +6,9 @@
 package Controller;
 
 import Bean.MovieInfo;
-import Services.UpdateScreeningDetails;
+import Services.UpdateMovieDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author JAGADISH
  */
-public class Screening extends HttpServlet {
+public class DeleteMovieScreening extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,36 +31,21 @@ public class Screening extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            System.out.println("inside");
-            Date screeningDate = new Date();
-            //SimpleDateFormat simpDate=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-            //SimpleDateFormat simpDate2=new SimpleDateFormat("yyyy/MM/dd HH:mm");
-            System.out.println("screendate--->"+request.getParameter("screendate"));
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-            screeningDate = df.parse(request.getParameter("screendate"));
-            MovieInfo movieInfo=new MovieInfo();
-            UpdateScreeningDetails sd=new UpdateScreeningDetails();
-            
-            movieInfo.setScreenId(request.getParameter("screen"));
-            movieInfo.setMovieId(request.getParameter("movie"));
-            //screeningDate=simpDate.parse(request.getParameter("screentime"));
-            //movieInfo.setScreeningTime(simpDate2.parse(simpDate2.format(screeningDate)));
-            movieInfo.setScreeningDate(screeningDate);
-            movieInfo.setScreeningTime(request.getParameter("time"));
-             System.out.println("screendate   444--->"+screeningDate);
-            Boolean insert=sd.insertScreening(movieInfo);
-            if(insert){
-                response.sendRedirect("addScreeningDetails.jsp");
+        MovieInfo movieInfo=new MovieInfo();
+        UpdateMovieDetails uploadMovieDetails=new UpdateMovieDetails();
+        String movieId=request.getParameter("movieid");
+        movieInfo.setMovieId(request.getParameter("movieid"));
+        if(request.getParameter("screening_id")!=null && !request.getParameter("screening_id").equals("")){
+            movieInfo.setScreeningId(request.getParameter("screening_id"));
+        }    
+        Boolean insert=uploadMovieDetails.deleteMovie(movieInfo);
+        if(insert){
+           response.sendRedirect("displayMovieScreening.jsp");
 
-            }
-            else{
-                response.sendRedirect("addMovieDetails.jsp");
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(Screening.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        else{
+           response.sendRedirect("displayMovieScreening.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,7 +75,6 @@ public class Screening extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
     }
 
     /**
