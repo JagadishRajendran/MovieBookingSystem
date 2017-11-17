@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/web/addMovieDetails.jsp</file>
-            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/src/java/Services/UpdateMovieDetails.java</file>
-            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/src/java/DAO/Dao.java</file>
-            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/web/UpdateMovie.jsp</file>
-            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/src/java/Services/FetchMovieScreening.java</file>
+            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/web/Login.jsp</file>
+            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/src/java/Services/LoginCredentials.java</file>
+            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/web/DisplayMovieInfo.jsp</file>
+            <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/web/addScreeningDetails.jsp</file>
             <file>file:/C:/Users/JAGADISH/Documents/NetBeansProjects/MovieBookingSystem/src/java/Controller/Movie.java</file>
         </group>
     </open-files>

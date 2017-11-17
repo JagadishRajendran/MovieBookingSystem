@@ -30,10 +30,11 @@ public class LoginCredentials {
             if(rs1.getString("Email") != null){
                 loginId=rs1.getString("Email");
                 password=rs1.getString("password");
+                loginInfo.setFirst_name(rs1.getString("F_name"));
+                loginInfo.setLast_name(rs1.getString("L_name"));
+                loginInfo.setUser_id(rs1.getString("user_id"));
                 System.out.println("sql3--->"+loginId+"  "+password);
             }
-                
-            
         } 
         } catch (SQLException ex) {
                 Logger.getLogger(LoginCredentials.class.getName()).log(Level.SEVERE, null, ex);

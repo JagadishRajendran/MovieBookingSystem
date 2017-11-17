@@ -321,7 +321,7 @@ public class Dao {
     	getConnection();
     	try {
             myStmt = myConn.createStatement();
-            myRs = myStmt.executeQuery("SELECT movie.name movie_name,director,screening_view.name screen_name,no_of_seats,screening_date,screening_time,movie_id,screening_view.screening_id,screen_id\n" +
+            myRs = myStmt.executeQuery("SELECT movie.name movie_name,movie.id movie_id,director,screening_view.name screen_name,no_of_seats,screening_date,screening_time,screening_view.screening_id,screen_id\n" +
                 "FROM movie\n" +
                 "LEFT JOIN (select name,no_of_seats,screening_date,screening_time,movie_id,screen_id,screening.id screening_id from screen,screening where screen.id = screen_id) as screening_view ON movie.id = movie_id");
             return myRs;

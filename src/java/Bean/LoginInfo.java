@@ -11,12 +11,22 @@ package Bean;
  */
 public class LoginInfo {
     private String user_name;
+    private String user_id;
     private String password;
     private String login_id;
     private String first_name;
     private String last_name;
-    public String tesytest;
 
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+    
+    
+    
     public String getUser_name() {
         return user_name;
     }

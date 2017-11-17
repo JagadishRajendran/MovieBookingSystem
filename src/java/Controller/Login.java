@@ -51,13 +51,18 @@ public class Login extends HttpServlet {
             LoginCredentials lc= new LoginCredentials();
             Boolean validUser= lc.checkCredentials(loginInfo);
             
-            session.setAttribute("validuser", validUser);
-            System.out.println("validuser-->"+validUser);
+            System.out.println("validuser-->"+loginInfo.getFirst_name());
             if(validUser){
-               response.sendRedirect("welcome.jsp");
+               
+               session.setAttribute("userId",loginInfo.getUser_id());
+               session.setAttribute("username",loginInfo.getFirst_name()+" "+loginInfo.getLast_name());
+               response.sendRedirect("DisplayMovies.jsp");
             }
             else{
-               response.sendRedirect("login.jsp");
+               
+               
+               session.setAttribute("status",validUser);
+               response.sendRedirect("Login.jsp");
             }
             
             
@@ -72,8 +77,18 @@ public class Login extends HttpServlet {
             loginInfo.setLast_name(request.getParameter("lastname"));
             Boolean registerStarus=lc.registerUser(loginInfo);
             session.setAttribute("registerStarus", registerStarus);
+            if(registerStarus){
+               
+               response.sendRedirect("Login.jsp");
+            }
+            else{
+               
+               
+               session.setAttribute("regstatus",registerStarus);
+               response.sendRedirect("Register.jsp");
+            }
                 
-            response.sendRedirect("login.jsp");
+            
         }
         
         

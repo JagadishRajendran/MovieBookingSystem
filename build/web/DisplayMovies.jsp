@@ -75,7 +75,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Movie Booking</a>
+          <%  
+                StringBuffer displayBuf1 = new StringBuffer();
+                HttpSession ses= request.getSession();
+                String userName="";
+                if(ses.getAttribute("username")!=null){
+                    userName= ses.getAttribute("username").toString();
+                }    
+                displayBuf1.append("<a class=\"navbar-brand\" href=\"#\">Welcome "+userName+"!</a>");
+                out.println(displayBuf1);
+          %>        
         </div>
       </div>
     </div>

@@ -39,10 +39,22 @@
                                     displayBuf2.append("<br>Duration &nbsp: " + rs.getInt("duration"));
                                     displayBuf2.append("<br>Description &nbsp: " + rs.getString("description"));
                                     displayBuf2.append("</p>");
+                                    
+                                    displayBuf2.append("Rating:<select name='rating' id='rating'>");
+                                    displayBuf2.append("<option value='1'>1</option>");
+                                    displayBuf2.append("<option value='2'>2</option>");
+                                    displayBuf2.append("<option value='3'>3</option>");
+                                    displayBuf2.append("<option value='4'>4</option>");
+                                    displayBuf2.append("<option value='5'>5</option>");
+                                    displayBuf2.append("<select/><br>");
+                                    displayBuf2.append("<input type='textarea' placeholder='Comments' name='screendate' id='screendate'><br>");
+                                    displayBuf2.append("<button>Submit Review</button>");
                                     displayBuf2.append("<button>Show Screenings</button>");
+                                    
+                                    
+                                    
                                     out.println(displayBuf2);
                                 %>
-                                <p class="message">Not registered? <a href="#">Create an account</a></p>
                             </form>
 
                         </div>
