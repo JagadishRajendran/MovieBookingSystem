@@ -36,7 +36,7 @@ public class Dao {
         }
         return myConn;
     } 
-    public Boolean InsertUser(LoginInfo loginInfo){
+    public Boolean insertUser(LoginInfo loginInfo){
         
         getConnection();
         
@@ -135,7 +135,7 @@ public class Dao {
         
     }
     
-    public Boolean InsertMovie(MovieInfo movieInfo){
+    public Boolean insertMovie(MovieInfo movieInfo){
         
         getConnection();
         
@@ -166,11 +166,71 @@ public class Dao {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }    
+    public Boolean insertMovieReview(MovieInfo movieInfo){
+        
+        getConnection();
+        
+        try {
+            
+            myStmt = myConn.createStatement();String mysql_QueryA;
+            // Insert query to insert values into Instructor
+            mysql_QueryA = "INSERT INTO review(movie_id,user_id,comments,rating) VALUES (?,?,?,?)";
+            PreparedStatement statement = myConn.prepareStatement(mysql_QueryA);
+            statement.setString(1,movieInfo.getMovieId());
+            statement.setString(2,movieInfo.getUserId());
+            statement.setString(3,movieInfo.getReview());
+            statement.setInt(4,movieInfo.getReviewRating());
+            int rows_inserted = statement.executeUpdate();
+            if (rows_inserted>0)
+            {
+                System.out.println("inserted number of rows: "+rows_inserted);
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         
         
     }
     
-    
+    public Boolean updateMovieReview(MovieInfo movieInfo){
+        
+        getConnection();
+        
+        try {
+            
+            myStmt = myConn.createStatement();String mysql_QueryA;
+            // Insert query to insert values into Instructor
+            mysql_QueryA = "update review set comments='"+movieInfo.getReview()+"'";
+            
+            mysql_QueryA=mysql_QueryA+ " where movie_id='"+movieInfo.getMovieId()+"' and user_id='"+movieInfo.getUserId()+"'";
+            System.out.println("mysql_QueryA---"+mysql_QueryA);
+            PreparedStatement statement = myConn.prepareStatement(mysql_QueryA);
+            int rows_inserted = statement.executeUpdate();
+            if (rows_inserted>0)
+            {
+                System.out.println("inserted number of rows: "+rows_inserted);
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        
+    }
     
     public Boolean updateMovie(MovieInfo movieInfo){
         
@@ -264,6 +324,7 @@ public class Dao {
                     + "where sg.screen_id = s.id and "
                     + "sg.movie_id = m.id and "
                     + "sg.movie_id = " + movieID;
+            System.out.println("mysql_movieScrQuery--->"+mysql_movieScrQuery);
             myRs = myStmt.executeQuery(mysql_movieScrQuery);
         } catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
@@ -272,16 +333,31 @@ public class Dao {
         return myRs;
     }
     
-    
-    
     public ResultSet getMovieInfoDao(int movieID) {
+
+        getConnection();
+        System.out.println("getMovieInfoDao---<");
+        try {
+            myStmt = myConn.createStatement();
+            String mysql_movieDetQuery;
+            mysql_movieDetQuery = "select name,director,cast,description,duration,icon from movie where id = " + movieID;
+            myRs = myStmt.executeQuery(mysql_movieDetQuery);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return myRs;
+    }
+    
+    
+    public ResultSet fetchMovieReview(MovieInfo movieInfo) {
 
         getConnection();
 
         try {
             myStmt = myConn.createStatement();
             String mysql_movieDetQuery;
-            mysql_movieDetQuery = "select name,director,cast,description,duration,icon from movie where id = " + movieID;
+            mysql_movieDetQuery = "select * from review where movie_id =" + movieInfo.getMovieId()+" and user_id="+ movieInfo.getUserId();
             myRs = myStmt.executeQuery(mysql_movieDetQuery);
         } catch (SQLException ex) {
             Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);

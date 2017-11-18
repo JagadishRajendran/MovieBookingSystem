@@ -14,3 +14,17 @@ function selectedMovie(movieid) {
     document.getElementById("displayMovieForm").submit();    
 
 }
+
+function form1Submit() {
+    alert("Inside-->");
+        
+    alert("Inside2222-->"+test);
+    document.getElementById("UpdateMovieReview").submit();    
+
+}
+
+function form2Submit() {
+    alert("Inside2-->");
+    document.getElementById("DisplayMovieInfo").submit();    
+
+}

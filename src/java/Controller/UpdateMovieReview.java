@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Bean.MovieInfo;
+import Services.UpdateMovieDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author JAGADISH
  */
-@WebServlet(name = "DisplayMovieInfo", urlPatterns = {"/DisplayMovieInfo"})
-public class DisplayMovieInfo extends HttpServlet {
+@WebServlet(name = "UpdateMovieReview", urlPatterns = {"/UpdateMovieReview"})
+public class UpdateMovieReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +34,31 @@ public class DisplayMovieInfo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("insidenkbfjb--->");
-        System.out.println("screenmovieid--->"+request.getParameter("screenmovieid"));
-        int movieID = Integer.parseInt(request.getParameter("screenmovieid"));
-        HttpSession session = request.getSession();
-        session.setAttribute("screenmovieid", movieID);
-        response.sendRedirect("ScreeningInfo.jsp");
+        HttpSession session= request.getSession();
+        String operation="";
+        Boolean insertStatus;
+        MovieInfo movieInfo=new MovieInfo();
+        UpdateMovieDetails upd=new UpdateMovieDetails();
+        System.out.println("movieid--->"+request.getParameter("movieid")+"userid--->  "+request.getParameter("userid"));
+        movieInfo.setMovieId(request.getParameter("movieid"));
+        
+        movieInfo.setUserId(request.getParameter("userid"));
+        movieInfo.setReview(request.getParameter("comments"));
+        if(!operation.equals("") && operation.equals("insert")){
+            movieInfo.setReviewRating(Integer.parseInt(request.getParameter("rating")));
+            insertStatus= upd.insertMovieReview(movieInfo);
+        }
+        else{
+            insertStatus= upd.updateMovieReview(movieInfo);
+        }
+           
+        if(insertStatus){
+           response.sendRedirect("DisplayMovieInfo.jsp");
+
+        }
+        else{
+           response.sendRedirect("DisplayMovieInfo.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

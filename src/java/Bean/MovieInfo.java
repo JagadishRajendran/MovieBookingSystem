@@ -27,7 +27,37 @@ public class MovieInfo {
     private String screenId;
     private String screeningId;
     private String movieId;
+    private String userId;
+    private String review;
+    private int reviewRating;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public int getReviewRating() {
+        return reviewRating;
+    }
+
+    public void setReviewRating(int reviewRating) {
+        this.reviewRating = reviewRating;
+    }
+
+    
+    
     public String getScreeningId() {
         return screeningId;
     }

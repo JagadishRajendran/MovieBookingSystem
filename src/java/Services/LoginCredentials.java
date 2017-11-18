@@ -50,7 +50,7 @@ public class LoginCredentials {
     
     public Boolean registerUser(LoginInfo loginInfo){
         Dao dao=new Dao();
-        Boolean register= dao.InsertUser(loginInfo);
+        Boolean register= dao.insertUser(loginInfo);
         return register;
     }
     

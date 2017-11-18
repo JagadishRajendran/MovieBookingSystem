@@ -33,6 +33,12 @@ public class MovieDetails {
         ResultSet rs = dao.getMovieScreeningInfoDao(movieID);
         return rs;
     }
+    
+    public ResultSet getMovieReview(MovieInfo mi) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.fetchMovieReview(mi);
+        return rs;
+    }
 
    /* public ResultSet getBlockedSeats(int screeningID) {
         Dao dao = new Dao();

@@ -39,8 +39,8 @@
                                 <input  type="submit" value="Submit" name="newmovie" />
                                 
                                 <%
-                                    /*StringBuffer displayBuf2= new StringBuffer();
-                                    displayBuf2.append("<input type='text' placeholder='Email id' name='loginid' id='loginid'/>");
+                                    StringBuffer displayBuf2= new StringBuffer();
+                                    /*displayBuf2.append("<input type='text' placeholder='Email id' name='loginid' id='loginid'/>");
                                     displayBuf2.append("<input type='password' placeholder='Password' name='password' id='password'/>");
                                     displayBuf2.append("<input type='hidden'  name='hidoperation' id='hidoperation' value='login'/>");
                                     displayBuf2.append("<button>login</button>");
