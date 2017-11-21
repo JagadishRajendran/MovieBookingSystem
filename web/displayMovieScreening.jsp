@@ -18,16 +18,18 @@
         <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css'>
         <script src='https://code.jquery.com/jquery-1.10.1.min.js'></script>
         <script src='https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js'></script>
+        <script src="js/Movie.js"></script>
     <style type="text/css" media="screen">
         body {
-          padding-top: 80px;
+          padding: 100px;
           background-color:#141311;
           color:#d75813;
         }
+        
     </style>
     </head>
     <body>
-        <div class="container">
+    <div class="container">
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -35,14 +37,20 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
+        
         <br>
 	<div class="container">
 	  <ul class="nav nav-tabs">
 	    <li style="font-size:150%"class="active"><a href="#">Home</a></li>
-	    <li><a style="font-size:150%" href="#">Insert Movies</a></li>
-	    <li><a style="font-size:150%" href="#">Screening Time</a></li>
+	    <li><a style="font-size:150%" href="addMovieDetails.jsp">Insert Movies</a></li>
+	    <li><a style="font-size:150%" href="addScreeningDetails.jsp">Screening Time</a></li>
 	    <li><a style="font-size:150%" href="#">Food</a></li>
+            <li style="font-size:150%;float:right;"><% StringBuffer displayBuflog = new StringBuffer();
+                                        HttpSession ses2= request.getSession();
+                                        displayBuflog.append("<a id=\"myLink\" href=\"Logout\"  onclick=\"return myFunctionLogout();\">Logout</a>");
+                                        out.println(displayBuflog);%></li>
+
   	  </ul>
         <br>
   
@@ -67,22 +75,32 @@
                                         while(rs.next()){
                                             displayBuf.append("<tr><td>"+rs.getString("movie_name")+"</td>");
                                             displayBuf.append("<td >"+rs.getString("director")+"</td>");
-                                            displayBuf.append("<td>"+rs.getString("screen_name")+"</td>");
-                                            displayBuf.append("<td>"+rs.getDate("screening_date")+"</td>");
-                                            displayBuf.append("<td>"+rs.getString("screening_time")+"</td>");
+                                            if(rs.getString("screen_name") != null){
+                                                displayBuf.append("<td>"+rs.getString("screen_name")+"</td>");
+                                            }
+                                            else{
+                                                displayBuf.append("<td></td>");
+                                            }
+                                            if(rs.getDate("screening_date") != null){
+                                                displayBuf.append("<td>"+rs.getDate("screening_date")+"</td>");
+                                            }
+                                            else{
+                                                displayBuf.append("<td></td>");
+                                            }
+                                            if(rs.getString("screening_time") != null){
+                                                displayBuf.append("<td>"+rs.getString("screening_time")+"</td>");
+                                            }
+                                            else{
+                                                displayBuf.append("<td></td>");
+                                            }
                                             displayBuf.append("<td>"+"<a href=\"/MovieBookingSystem/UpdateMovie.jsp?movieid="+rs.getString("movie_id")+"&screening_id="+rs.getString("screening_id")+"\">Update</a>"+"</td>");
-                                            displayBuf.append("<td>"+"<a href=\"/MovieBookingSystem/DeleteMovieScreening?movieid="+rs.getString("movie_id")+"&screening_id="+rs.getString("screening_id")+"\">Delete</a>"+"</td></tr>");
-                                        }
+                                            displayBuf.append("<td>"+"<a href=\"/MovieBookingSystem/DeleteMovieScreening?movieid="+rs.getString("movie_id")+"&screening_id="+rs.getString("screening_id")+"\" onclick=\"return myFunction();\">Delete</a>"+"</td></tr>");
+                                            
+                                        }%><%
                                         out.println(displayBuf);
                                     %>    
                                 </table>
                                 </font>
-                            </form>             
-<!--        </div>-->
-  
-
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="js/animate.js"></script>
+                            </form>            
     </body>
 </html>

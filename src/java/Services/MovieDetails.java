@@ -39,6 +39,83 @@ public class MovieDetails {
         ResultSet rs = dao.fetchMovieReview(mi);
         return rs;
     }
+    
+    public ResultSet getSelectedSeat(MovieInfo mi) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.fetchSelectedSeat(mi);
+        return rs;
+    }
+    
+    public ResultSet getFoods() {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getFoodsDao();
+        return rs;
+    }
+
+    
+    public ResultSet getFoodDetails(String foodName) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getFoodDetailsDao(foodName);
+        return rs;
+    }
+
+    public ResultSet getFoodDetails(int foodID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getFoodDetailsDao(foodID);
+        return rs;
+    }
+    
+    public ResultSet getreservedMovie(int userID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getreservedMovie(userID);
+        return rs;
+    }
+    
+    public ResultSet getreservedfood(int reservationID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getreservedfood(reservationID);
+        return rs;
+    }
+    
+    public ResultSet getReviewByMovieID(int movieID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getReviewByMovieID(movieID);
+        return rs;
+    }
+    
+    public ResultSet getMovieReview(int movieID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getMovieReview(movieID);
+        return rs;
+    }
+    
+    
+    public void insertReservation(int userID, int screeningID, String seatIDs, double price) {
+        Dao dao = new Dao();
+        dao.insertReservationDao(userID,screeningID, seatIDs, price);
+    }
+
+    public ResultSet getReservationID(int screeningID, String seatIDs) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getReservationIDDao(screeningID, seatIDs);
+        return rs;
+    }
+
+    public void updateReservationPrice(int reservationID, double price) {
+        Dao dao = new Dao();
+        dao.updateReservationPriceDao(reservationID, price);
+    }
+    
+    public ResultSet getScreeningInfo(int screeningID) {
+        Dao dao = new Dao();
+        ResultSet rs = dao.getScreeningInfoDao(screeningID);
+        return rs;
+    }
+
+    public void insertFoodReserve(int foodID, int reservationID, int foodCount, double price) {
+        Dao dao = new Dao();
+        dao.insertFoodReserveDao(foodID, reservationID, foodCount, price);
+    }
 
    /* public ResultSet getBlockedSeats(int screeningID) {
         Dao dao = new Dao();

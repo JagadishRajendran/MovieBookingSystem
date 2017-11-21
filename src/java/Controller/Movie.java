@@ -63,13 +63,16 @@ public class Movie extends HttpServlet {
         movieInfo.setMovie_name(request.getParameter("title"));
         movieInfo.setDirector(request.getParameter("director"));
         movieInfo.setCast(request.getParameter("cast"));
-        movieInfo.setDescription(request.getParameter("description"));
+        
+        String desc=request.getParameter("description");
+        String description = desc.replace("'", "");
+        movieInfo.setDescription(description);
         movieInfo.setDuration(Integer.parseInt(request.getParameter("duration")));
         
         if(request.getParameter("hidoperation").equals("insert")){
             Boolean insert=uploadMovieDetails.insertMovie(movieInfo);
             if(insert){
-               response.sendRedirect("addMovieDetails.jsp");
+               response.sendRedirect("displayMovieScreening.jsp");
 
             }
             else{

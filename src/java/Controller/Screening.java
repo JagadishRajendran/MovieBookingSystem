@@ -53,14 +53,13 @@ public class Screening extends HttpServlet {
             //movieInfo.setScreeningTime(simpDate2.parse(simpDate2.format(screeningDate)));
             movieInfo.setScreeningDate(screeningDate);
             movieInfo.setScreeningTime(request.getParameter("time"));
-             System.out.println("screendate   444--->"+screeningDate);
             Boolean insert=sd.insertScreening(movieInfo);
             if(insert){
-                response.sendRedirect("addScreeningDetails.jsp");
+                response.sendRedirect("displayMovieScreening.jsp");
 
             }
             else{
-                response.sendRedirect("addMovieDetails.jsp");
+                response.sendRedirect("addScreeningDetails.jsp");
             }
         } catch (Exception ex) {
             Logger.getLogger(Screening.class.getName()).log(Level.SEVERE, null, ex);

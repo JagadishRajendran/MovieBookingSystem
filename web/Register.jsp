@@ -18,9 +18,6 @@
                 <ul id="mainnav">
                     <li class="current"><a href="#">Home</a></li>
                     <li><a href="#">Book Tickets</a></li>
-                    <li><a href="#">Movies Playing</a></li>
-                    <li><a href="#">My Booking</a></li>
-                    <li><a href="#">My Account</a></li>
                     <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
@@ -63,11 +60,11 @@
         </div>
   
         <div id="featured">
-            <h1>Online Movie Ticket Reservation system<a href="#"></a></h1>
+            
         </div>
 
         <div id="footer">
-        <h4><p>&copy; Copyright 2017 SANJ  All Rights Reserved <br /></p></h4>
+        
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

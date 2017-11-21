@@ -46,7 +46,8 @@ public class Login extends HttpServlet {
         System.out.println("operation--->"+operation);
         if(operation.equals("login")){
             LoginInfo loginInfo=new LoginInfo();
-            loginInfo.setLogin_id(request.getParameter("loginid"));
+            String loginID=request.getParameter("loginid");
+            loginInfo.setLogin_id(loginID);
             loginInfo.setPassword(request.getParameter("password"));
             LoginCredentials lc= new LoginCredentials();
             Boolean validUser= lc.checkCredentials(loginInfo);
@@ -56,7 +57,12 @@ public class Login extends HttpServlet {
                
                session.setAttribute("userId",loginInfo.getUser_id());
                session.setAttribute("username",loginInfo.getFirst_name()+" "+loginInfo.getLast_name());
-               response.sendRedirect("DisplayMovies.jsp");
+               if(loginID.equals("admin")){
+                    response.sendRedirect("displayMovieScreening.jsp");
+               }
+               else{
+                   response.sendRedirect("DisplayMovies.jsp");
+               }
             }
             else{
                

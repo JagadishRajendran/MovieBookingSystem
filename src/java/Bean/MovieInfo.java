@@ -30,7 +30,47 @@ public class MovieInfo {
     private String userId;
     private String review;
     private int reviewRating;
+    private int seatStatus;
+    private String seatValue;
+    private int reservationID;
+    private String seatID;
 
+    public int getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(int reservationID) {
+        this.reservationID = reservationID;
+    }
+
+    public String getSeatID() {
+        return seatID;
+    }
+
+    public void setSeatID(String seatID) {
+        this.seatID = seatID;
+    }
+
+    
+    public int getSeatStatus() {
+        return seatStatus;
+    }
+
+    public void setSeatStatus(int seatStatus) {
+        this.seatStatus = seatStatus;
+    }
+
+    
+    public String getSeatValue() {
+        return seatValue;
+    }
+
+    public void setSeatValue(String seatValue) {
+        this.seatValue = seatValue;
+    }
+
+    
+    
     public String getUserId() {
         return userId;
     }

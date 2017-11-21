@@ -35,11 +35,10 @@ public class UpdateMovieReview extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session= request.getSession();
-        String operation="";
+        String operation=request.getParameter("operation");
         Boolean insertStatus;
         MovieInfo movieInfo=new MovieInfo();
         UpdateMovieDetails upd=new UpdateMovieDetails();
-        System.out.println("movieid--->"+request.getParameter("movieid")+"userid--->  "+request.getParameter("userid"));
         movieInfo.setMovieId(request.getParameter("movieid"));
         
         movieInfo.setUserId(request.getParameter("userid"));

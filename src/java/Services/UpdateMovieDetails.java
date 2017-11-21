@@ -7,6 +7,9 @@ package Services;
 
 import Bean.MovieInfo;
 import DAO.Dao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,8 +32,10 @@ public class UpdateMovieDetails {
 
     public Boolean deleteMovie(MovieInfo movieInfo){
         Dao dao=new Dao();
-        Boolean deleteStatus=dao.deleteMovie(movieInfo);
+        Boolean deleteStatus;
+        deleteStatus = dao.deleteMovie(movieInfo);
         return deleteStatus;
+        
     }
     
     public Boolean insertMovieReview(MovieInfo movieInfo){
@@ -45,5 +50,36 @@ public class UpdateMovieDetails {
         return updateStatus;
     }
     
+    public Boolean insertSelectedSeat(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean insertStatus=dao.insertSelectedSeat(movieInfo);
+        return insertStatus;
+    }
     
+    public Boolean updateSelectedSeat(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean updateStatus=dao.updateSelectedSeat(movieInfo);
+        return updateStatus;
+    }
+    
+    public Boolean deleteReservedMovie(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean deleteStatus;
+        try {
+            deleteStatus = dao.deleteReservedMovie(movieInfo);
+            return deleteStatus;
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMovieDetails.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+    }
+    
+    public Boolean deleteReservedSeats(MovieInfo movieInfo){
+        Dao dao=new Dao();
+        Boolean deleteStatus;
+        deleteStatus = dao.deleteReservedSeats(movieInfo);
+        return deleteStatus;
+        
+    }
 }

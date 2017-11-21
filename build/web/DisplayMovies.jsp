@@ -1,9 +1,10 @@
 <%--
     Document   : displaymovies
     Created on : Nov 7, 2017, 2:40:28 PM
-    Author     : nithi
+    Author     : Jagadish
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Services.MovieDetails"%>
 <%@page import="Bean.MovieInfo"%>
@@ -23,7 +24,7 @@
         <style type="text/css" media="screen">
         body {
           padding-top: 80px;
-          padding-left: 180px;
+/*          padding-left: 180px;*/
           background-color:#141311;
           color:#d75813;
         }
@@ -82,13 +83,28 @@
                 if(ses.getAttribute("username")!=null){
                     userName= ses.getAttribute("username").toString();
                 }    
-                displayBuf1.append("<a class=\"navbar-brand\" href=\"#\">Welcome "+userName+"!</a>");
+                displayBuf1.append("<a class=\"navbar-brand\" href=\"#\">Welcome "+userName+"!</a>");   
                 out.println(displayBuf1);
           %>        
         </div>
       </div>
     </div>
   </div>
+        
+    <div class="container">
+	  <ul class="nav nav-tabs">
+	    <li style="font-size:150%" class="active"><a href="DisplayMovies.jsp">Home</a></li>
+            <li style="font-size:150%"><%StringBuffer displayBufMr = new StringBuffer();
+                                        HttpSession ses1= request.getSession();
+                                        displayBufMr.append("<a  href=\"DisplayReservedMovie.jsp\">My Reservation</a>");
+                                      out.println(displayBufMr);%></li>
+            
+            <li style="font-size:150%;float:right;"><% StringBuffer displayBuflog = new StringBuffer();
+                                        HttpSession ses2= request.getSession();
+                                        displayBuflog.append("<a href=\"Logout\"  onclick=\"return myFunctionLogout();\">Logout</a>");
+                                        out.println(displayBuflog);%></li>
+            </ul>
+        <br><br><br><br>
      <div class="form">
     <form id='displayMovieForm' action="DisplayMovies" method="post" >    
         
@@ -106,14 +122,24 @@
         movieID = rs.getInt("id");
         movieName = rs.getString("name");
         movieIcon = rs.getString("icon");
+        //String rating = String.valueOf(rs.getDouble("avg_rating"));
+        Double rating = rs.getDouble("avg_rating");
+        DecimalFormat numberFormat = new DecimalFormat("#.0");
+        String temp=numberFormat.format(rating);
         displayBuf2.append("<input type='hidden'  name='hidmovieid' id='hidmovieid' value='register'/>");
         displayBuf2.append("<div class='col-lg-4'movie-tile text-center' data-trailer-youtube-id='x_7YlGv9u1g' data-toggle='modal' data-target='#trailer'>");
         displayBuf2.append("<img class='img-thumbnail' src='images/"+movieIcon+"' ");
         displayBuf2.append("<br> <br> <br>");
         displayBuf2.append("<optgroup>");
         displayBuf2.append("<option name='movie' id='movie' value='" + movieID + "'>" + movieName + "</option>");
-        displayBuf2.append("</optgroup>");                                            
-        displayBuf2.append("<h3>9.2</h3>");
+        displayBuf2.append("</optgroup>"); 
+        if(temp !=null && !temp.equals(".0")){
+            //displayBuf2.append("<h3>"+rating+"/5</h3>");
+            displayBuf2.append("<h3>"+numberFormat.format(rating)+"/5</h3>");
+        }
+        else{
+            displayBuf2.append("<h3>-/5</h3>");
+        }
         displayBuf2.append("<div id='browse_app'>");
         displayBuf2.append("<input type='button' onclick='selectedMovie(\""+movieID+"\")' class='btn btn-info' value='Book Now'>");
         displayBuf2.append("<br> <br> <br> <br>");
@@ -124,5 +150,6 @@
     %>
     </form>
 </div>
+    </div>
     </body>
 </html>

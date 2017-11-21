@@ -146,7 +146,6 @@ img.logo {
 /* ========		featured		============================================================== */        
 #featured {
 	float:left;
-	background:;
 	width:870px;
 	min-height:209px;
 	overflow:auto;
@@ -269,7 +268,6 @@ img.logo {
 }
 .form {
   position: relative;
-  background: ;
   z-index: 1;
   max-width: 360px;
   margin: 0 auto 100px;
