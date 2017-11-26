@@ -133,9 +133,11 @@
                             }
                         }
                     }
-                    displayBuf2.append("</td></tr><tr><td><h1>Total</h1><td><td><h2>:</h2></td><td><h2>$" + price + "</h2></td></tr>");
-                    displayBuf2.append("</td></tr></table><br>");
+                    //displayBuf2.append("</td></tr><tr><td><h1>Total</h1><td><td><h2>:</h2></td><td><h2>$" + price + "</h2></td></tr>");
+                    //displayBuf2.append("</td></tr></table><br>");
                 }
+                displayBuf2.append("</td></tr><tr><td><h1>Total</h1><td><td><h2>:</h2></td><td><h2>$" + price + "</h2></td></tr>");
+                    displayBuf2.append("</td></tr></table><br>");
                 
                 out.println(displayBuf2);
             %>
