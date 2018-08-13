@@ -1,7 +1,7 @@
 <%--
     Document   : PaymentInfo
     Created on : Nov 18, 2017, 3:12:14 PM
-    Author     : nithi
+    Author     : JAGADISH
 --%>
 
 <%@page import="java.util.HashMap"%>
